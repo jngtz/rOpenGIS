@@ -1,3 +1,6 @@
+# FOR SPLITING LINESTRING 'LOOP' FEATURES
+# By Jason Goetz (jason.goetz@kitchener.ca)
+
 library(sf)
 library(sfheaders)
 library(mapview)
