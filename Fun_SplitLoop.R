@@ -1,5 +1,5 @@
 # FOR SPLITING LINESTRING 'LOOP' FEATURES
-# By Jason Goetz (jason.goetz@kitchener.ca)
+# By Jason Goetz (jasonngoetz@gmail.com)
 
 library(sf)
 library(sfheaders)
