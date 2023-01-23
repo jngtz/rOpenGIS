@@ -43,3 +43,4 @@ st_crs(d_sf) <- 4326 # WGS 84
 # View GPS points
 require(mapview)
 mapviewOptions(platform = "leafgl") # for fast rendering of many points
+mapview(d_sf)
