@@ -1,4 +1,5 @@
 # A FUNCTION TO CREATE TRACKS FROM POINTS
+# By Jason Goetz (jasonngoetz@gmail.com)
 
 st_track <- function(x){
   # Fast way to build track with multiple line segments
