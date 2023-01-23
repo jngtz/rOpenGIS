@@ -1,13 +1,16 @@
 library(httr)
 library(jsonlite)
 
+# Define API URL
 api_url <- "https://my52.geotab.com/apiv1/Get?typeName=LogRecord"
 
+# Define query paremeters "credentials" and "search"
 query_params <- list(
   credentials = noquote('{"userName":"YOURUSERNAME","database":"","password":"YOURPASSWORD"}'),
   search = noquote('{"deviceSearch":{"id":"YOURDEVICEID"},"fromDate":"2022-11-01T05:00:00Z","toDate": "2022-12-01T05:00:00Z","resultsLimit":50000}')
 )
 
+# Get response from API
 res <- GET(url = api_url, query = query_params)
 
 # Extract data from response
