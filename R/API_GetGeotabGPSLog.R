@@ -1,3 +1,6 @@
+# FOR GETTING GEOTAB GPS LOG DATA USING MYGEOTAB API
+# By Jason Goetz (jasonngoetz@gmail.com)
+
 library(httr)
 library(jsonlite)
 
