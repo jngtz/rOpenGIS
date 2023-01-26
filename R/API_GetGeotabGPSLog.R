@@ -1,27 +1,47 @@
-# FOR GETTING GEOTAB GPS LOG DATA USING MYGEOTAB API
+# FOR GETTING GEOTAB GPS LOG DATA USING THE MYGEOTAB API
 # By Jason Goetz (jasonngoetz@gmail.com)
 
 library(httr)
 library(jsonlite)
 
 # Define API URL
-api_url <- "https://YOURSERVERNUMBER.geotab.com/apiv1/Get?typeName=LogRecord"
+geotab_api <- "https://YOURSERVERNUMBER.geotab.com/apiv1/Get?typeName=LogRecord"
 
-# Define query paremeters "credentials" and "search"
-query_params <- list(
-  credentials = noquote('{"userName":"YOURUSERNAME","database":"","password":"YOURPASSWORD"}'),
-  search = noquote('{"deviceSearch":{"id":"YOURDEVICEID"},"fromDate":"2022-11-01T05:00:00Z","toDate": "2022-12-01T05:00:00Z","resultsLimit":50000}')
+# Define query "credential" and "search" paremeters as a JSON
+
+my_credentials <- list(
+  userName = "YOURUSERNAME",
+  database = "",
+  password = "YOURPASSWORD"
+)
+
+my_search <- list(
+  deviceSearch = list(id = "b49E"),
+  fromDate = "2022-11-01T05:00:00Z",
+  toDate = "2022-12-01T05:00:00Z",
+  resultsLimit = "50000"
+)
+
+my_credentials <- toJSON(my_credentials, auto_unbox = TRUE, pretty = TRUE)
+my_search <- toJSON(my_search, auto_unbox = TRUE, pretty = TRUE)
+
+my_query <- list(
+  credentials = my_credentials,
+  search = my_search
 )
 
 # Get response from API
-res <- GET(url = api_url, query = query_params)
+api_response <- GET(url = geotab_api, query = my_query)
 
 # Extract data from response
-data <- content(res)$result
+data <- content(api_response)$result
 
 # Convert data to a table
 require(data.table)
-d <- rbindlist(data) 
+d <- rbindlist(data)
+
+# Clean data if structure of column is a list
+d$device <- unlist(d$device)
 
 # Format date-times
 d$dateTime_UTC <- d$dateTime
